@@ -1,0 +1,37 @@
+{
+  "name": "ai-commander",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Commander – LLM 오케스트라 전용 브라우저",
+  "main": "dist/main/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron ai-commander.cjs",
+    "dev": "ELECTRON_DISABLE_SANDBOX=1 NODE_ENV=development electron ai-commander.cjs",
+    "dev:old": "concurrently -k \"vite --config vite.renderer.mjs\" \"tsc -w -p tsconfig.main.json\" \"wait-on tcp:5173 && ELECTRON_DISABLE_SANDBOX=1 NODE_ENV=development electron .\"",
+    "build": "rimraf dist && tsc -p tsconfig.main.json && vite build --config vite.renderer.mjs",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.6.0",
+    "electron-store": "^9.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "concurrently": "^8.2.2",
+    "electron-builder": "^24.13.3",
+    "electron-rebuild": "^3.2.9",
+    "esbuild": "^0.21.5",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.2",
+    "wait-on": "^7.2.0"
+  }
+}
